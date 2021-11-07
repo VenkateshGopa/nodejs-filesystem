@@ -27,6 +27,15 @@ app.get('/files',async (req, res)=>{
         res.status(400).send(e)
     }
 })
+app.get('/:datetime',async (req, res)=>{
+    try{
+        const buffer = fs.readFileSync(`./myfiles/${req.params.datetime}.txt`)
+        res.status(201).send(buffer.toString())
+    }
+    catch(e){
+        res.status(400).send(e)
+    }
+})
 
 app.listen(port , ()=>{
     console.log('server is up on ' + port);
