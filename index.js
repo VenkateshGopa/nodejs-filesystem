@@ -4,21 +4,21 @@ const fs = require('fs');
 const app = express()
 const port = process.env.PORT || 3000
 
-app.get('/',async (req, res)=>{
+app.get('/createfile',async (req, res)=>{
     const today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
     var dateTime = (date+'_'+time ).toString();
     let  filename = dateTime + '.txt'
     try{
-        fs.writeFileSync(`./myfiles/${filename}`,dateTime)
+        fs.writeFileSync(`./myfiles/${filename}`,today.toString())
         res.status(201).send(dateTime)
     }
     catch(e){
         res.status(400).send(e)
     }
 })
-app.get('/files',async (req, res)=>{
+app.get('/',async (req, res)=>{
     try{
         const data = fs.readdirSync('./myfiles').map(file => file)
         res.status(201).send(data)
