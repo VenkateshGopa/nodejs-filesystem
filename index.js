@@ -12,7 +12,7 @@ app.get('/createfile',async (req, res)=>{
     let  filename = dateTime + '.txt'
     try{
         fs.writeFileSync(`./myfiles/${filename}`,today.toString())
-        res.status(201).send(dateTime)
+        res.status(201).send("file created with current time to view all files go to '/' ")
     }
     catch(e){
         res.status(400).send(e)
